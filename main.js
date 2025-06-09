@@ -146,11 +146,13 @@ Array.prototype.flat2 = function() {
 //reduce
 Array.prototype.reduce2 = function(callback, initialValue) {
     let length = this.length;
-    const result = [];
+    let count = initialValue;
     for (let i = 0; i < length; i++) {
-        
+        count = callback.call(initialValue, count, this[i], this);
     }
-    return result;
+    return count;
 }
-// console.log("\n* Reduce 2")
-// console.log(people.reduce2((acc, person) => acc + person.age, 0));
+console.log("\n* Reduce 2")
+console.log(people.reduce2(function(acc, person){
+    return acc + person.age;
+}, 0));
