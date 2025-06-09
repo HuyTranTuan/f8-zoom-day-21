@@ -1,1 +1,1 @@
-[text](https://huytrantuan.github.io/f8-zoom-day-21/)
+[Link page](https://huytrantuan.github.io/f8-zoom-day-21/)
