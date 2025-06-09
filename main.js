@@ -72,14 +72,15 @@ Array.prototype.slice2 = function(start, end) {
 //sort
 Array.prototype.sort2 = function(compareFunction) {
     let length = this.length;
-    const result = [];
-    for (let i = 0; i < length; i++) {
+    let temp = this[0];
+    let result = [this[0]];
+    for (let i = 1; i < length; i++) {
         result.push(this[i]);
     }
     return result
 }
-// console.log("\n* Sort 2");
-// console.log(people.sort2((a, b) => a.age - b.age));
+console.log("\n* Sort 2");
+console.log(people.sort2((a, b) => a.age - b.age));
 
 //reverse
 Array.prototype.reverse2 = function() {
@@ -94,13 +95,17 @@ Array.prototype.reverse2 = function() {
 // console.log(people.reverse2());
 
 //concat
-Array.prototype.concat2 = function(param) {
+Array.prototype.concat2 = function(...items) {
     let length = this.length;
     const result = [];
     for (let i = 0; i < length; i++) {
         result.push(this[i]);
     }
-    // if()
+    if(items)
+        for(let i of items){
+            result.push(i);
+        }
+    
     return result
 }
 // console.log("\n* Concat 2")
@@ -109,45 +114,41 @@ Array.prototype.concat2 = function(param) {
 //join
 Array.prototype.join2 = function(separator) {
     let length = this.length;
-    const result = [];
+    let result = '';
     for (let i = 0; i < length; i++) {
-        result.push(this[i]);
+        result += this[i] + separator;
+        if(i == length-1)
+            result += this[i];
     }
     return result
 }
 // console.log("\n* Join 2")
-// console.log(fruits.join2(","));
+// console.log(fruits.join2(" , "));
 
 //flat
 Array.prototype.flat2 = function() {
     let length = this.length;
     const result = [];
     for (let i = 0; i < length; i++) {
-        result.push(this[i]);
+        if(Array.isArray(this[i]))
+            this[i].forEach(element => {
+                result.push(element)
+            });
+        else result.push(this[i]);
     }
     return result
 }
 // console.log("\n* Flat 2")
 // console.log(twoDimensionalArray.flat2());
 
-//filter
-Array.prototype.filter2 = function(callback) {
-    let length = this.length;
-    const result = [];
-    for (let i = 0; i < length; i++) {
-        result.push(this[i]);
-    }
-    return result.filter(callback);
-}
-// console.log("\n* Filter 2")
-// console.log(people.filter2((person) => person.age > 20));
+
 
 //reduce
 Array.prototype.reduce2 = function(callback, initialValue) {
     let length = this.length;
     const result = [];
     for (let i = 0; i < length; i++) {
-        result.push(this[i]);
+        
     }
     return result;
 }
