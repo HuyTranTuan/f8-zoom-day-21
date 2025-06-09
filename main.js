@@ -8,10 +8,10 @@ const twoDimensionalArray = [
 const people = [
     {name: "John", age: 20},
     {name: "Jane", age: 21},
-    {name: "Jim", age: 22},
-    {name: "Jill", age: 23},
     {name: "Jack", age: 24},
     {name: "Jill", age: 23},
+    {name: "Jill", age: 25},
+    {name: "Jim", age: 22},
 ];
 
 
@@ -38,8 +38,8 @@ Array.prototype.splice2 = function(start, deleteCount, ...items) {
     fruits2 = copyArray
     return result;
 }
-// console.log("* Splice 2")
-// console.log(fruits2.splice2(1, 2, "Lemon", "Apple", "Mango")); //
+console.log("* Splice 2")
+console.log(fruits2.splice2(1, 2, "Lemon", "Apple", "Mango")); //
 
 
 
@@ -63,24 +63,31 @@ Array.prototype.slice2 = function(start, end) {
     }
     return result;
 }
-// console.log("\n* Slice 2")
-// console.log(fruits.slice2(1, 3));
-// console.log(fruits.slice2(-2, 3));
-// console.log(fruits.slice2(3, 4));
+console.log("\n* Slice 2")
+console.log(fruits.slice2(1, 3));
+console.log(fruits.slice2(-2, 3));
+console.log(fruits.slice2(3, 4));
 
 
 //sort
-Array.prototype.sort2 = function(compareFunction) {
+Array.prototype.sort2 = function(callback, thisArg){
     let length = this.length;
-    let temp = this[0];
-    let result = [this[0]];
-    for (let i = 1; i < length; i++) {
-        result.push(this[i]);
+    let temp;
+    let result = this;
+    for(let i= 0; i < length; i++){
+        for(let j=  i + 1; j < length; j++){
+            if (callback.call(thisArg, result[i], result[j]) > 0){
+                temp = result[i];
+                result[i] = result[j];
+                result[j] = temp;
+            }
+        }
     }
-    return result
+    return result;
 }
 console.log("\n* Sort 2");
 console.log(people.sort2((a, b) => a.age - b.age));
+
 
 //reverse
 Array.prototype.reverse2 = function() {
@@ -91,8 +98,8 @@ Array.prototype.reverse2 = function() {
     }
     return result;
 }
-// console.log("\n* Reverse 2")
-// console.log(people.reverse2());
+console.log("\n* Reverse 2")
+console.log(people.reverse2());
 
 //concat
 Array.prototype.concat2 = function(...items) {
@@ -108,8 +115,8 @@ Array.prototype.concat2 = function(...items) {
     
     return result
 }
-// console.log("\n* Concat 2")
-// console.log(fruits.concat2("Banana", "Orange", "Lemon", "Apple", "Mango"));
+console.log("\n* Concat 2")
+console.log(fruits.concat2("Banana", "Orange", "Lemon", "Apple", "Mango"));
 
 //join
 Array.prototype.join2 = function(separator) {
@@ -122,8 +129,8 @@ Array.prototype.join2 = function(separator) {
     }
     return result
 }
-// console.log("\n* Join 2")
-// console.log(fruits.join2(" , "));
+console.log("\n* Join 2")
+console.log(fruits.join2(" , "));
 
 //flat
 Array.prototype.flat2 = function() {
@@ -138,8 +145,8 @@ Array.prototype.flat2 = function() {
     }
     return result
 }
-// console.log("\n* Flat 2")
-// console.log(twoDimensionalArray.flat2());
+console.log("\n* Flat 2")
+console.log(twoDimensionalArray.flat2());
 
 
 
