@@ -1,0 +1,12 @@
+table,
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+}
+th {
+  color: blueviolet;
+}
+td {
+  padding: 5px 15px;
+}

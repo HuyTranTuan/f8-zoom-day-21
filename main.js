@@ -1,5 +1,10 @@
 const fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
-let fruits2 = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+let fruitsClone = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+const firstTwoDimensionalArray = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+];
 const twoDimensionalArray = [
     [1, 2, 3],
     [4, 5, 6],
@@ -10,9 +15,34 @@ const people = [
     {name: "Jane", age: 21},
     {name: "Jack", age: 24},
     {name: "Jill", age: 23},
-    {name: "Jill", age: 25},
+    {name: "Jillz", age: 25},
     {name: "Jim", age: 22},
 ];
+
+document.getElementById("fruit").innerHTML = `Fruits: ${fruits}`;
+
+let twoDHtml = '[';
+for(let i of firstTwoDimensionalArray){
+    if(Array.isArray(i)){
+        twoDHtml += '[ ';
+        for(let j of i){
+            twoDHtml += `<span> ${j} </span>`
+        }
+        twoDHtml += ' ]';
+    } else twoDHtml+= `<span>${i}</span>`;
+}
+document.getElementById("two-d-array").innerHTML = `<br>Array: ${twoDHtml} ]`;
+
+let peopleHtml = `<table style="width:200px">
+  <thead><tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr></thead><tbody>`
+for(let person of people){
+    peopleHtml += `<tr><td>${person.name}</td> <td>${person.age}</td></tr>`;
+}
+peopleHtml += '</tbody></table>'
+document.getElementById("people").innerHTML = `<br>${peopleHtml}`;
 
 
 //splice
@@ -35,11 +65,11 @@ Array.prototype.splice2 = function(start, deleteCount, ...items) {
     for(let i=start + deleteCount; i<length; i++){
         copyArray.push(this[i])
     }
-    fruits2 = copyArray
+    fruitsClone = copyArray
     return result;
 }
 console.log("* Splice 2")
-console.log(fruits2.splice2(1, 2, "Lemon", "Apple", "Mango")); //
+console.log(fruitsClone.splice2(1, 2, "Lemon", "Apple", "Mango")); //
 
 
 
@@ -130,7 +160,7 @@ Array.prototype.join2 = function(separator) {
     return result
 }
 console.log("\n* Join 2")
-console.log(fruits.join2(" , "));
+console.log(fruits.join2(" */* "));
 
 //flat
 Array.prototype.flat2 = function() {
@@ -160,6 +190,7 @@ Array.prototype.reduce2 = function(callback, initialValue) {
     return count;
 }
 console.log("\n* Reduce 2")
+console.log("Sum age: ")
 console.log(people.reduce2(function(acc, person){
     return acc + person.age;
 }, 0));
